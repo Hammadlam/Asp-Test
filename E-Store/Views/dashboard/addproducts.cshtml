@@ -1,0 +1,56 @@
+﻿@model products
+
+@{
+    ViewData["Title"] = "addproducts";
+    Layout = "~/Views/Shared/Estore_layout.cshtml";
+}
+
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Sign Up Start -->
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center" style="margin-right: 150px">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <a href="index.html" class="">
+                            <h3 class="text-primary">Add products</h3>
+                        </a>
+                    </div>
+                    <form id="addCandidateForm" asp-controller="dashboard" asp-action="addproducts" method="post">
+
+                        <div class="form-floating mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" asp-for="product_name" class="form-control" id="product_name" placeholder="Name">
+                         
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label class="form-label">Product Type</label>
+                            <input type="text" asp-for="prod_type" class="form-control" id="product_type" placeholder="Type">
+                          
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label class="form-label">Product Size</label>
+                            <input type="text" asp-for="prod_size" class="form-control" id="product_size" placeholder="Size">
+                          
+                        </div>
+                        <div class="form-floating mb-3 position-relative">
+                            <label class="form-label">Color</label>
+                            <input type="text" asp-for="prod_color" class="form-control" id="product_color" placeholder="Color">
+                           
+
+                        </div>
+                     
+
+                        <input type="submit" value="Add" class="btn btn-primary py-3 w-100 mb-4">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add User End -->
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+

@@ -1,0 +1,118 @@
+﻿@model List<products>
+@{
+    ViewData["Title"] = "ViewProducts";
+    Layout = "~/Views/Shared/Estore_layout.cshtml";
+}
+
+<style>
+    #tablebordernone th, #tablebordernone td {
+        text-align: center;
+    }
+
+    #tablebordernone th, #tablebordernone tbody {
+        border: none;
+    }
+</style>
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <br />
+                       
+                        <div class="col-lg-10" style="float:right">
+                           
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable" id="tablebordernone">
+                            <thead>
+                                <tr>
+                                   <th>id</th>
+                                   <th>Product name</th>
+                                   <th>Product Type</th>
+                                   <th>Product size</th>
+                                   <th>prduct color</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var c in Model)
+                                {
+                                    <tr>
+                                        <td>@c.prod_id</td>
+                                        <td>@c.product_name</td>
+                                        <td>@c.prod_type</td>
+                                        <td>@c.prod_size</td>
+                                        <td>@c.prod_color</td>
+
+
+                                        <td>
+                                            <a asp-action="edit" asp-route-id="@c.prod_id" class="text-Primary editBtn">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-id="@c.prod_id" class="text-danger deleteBtn">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    $(document).ready(function () {
+        // Handle delete button click
+        $('#tablebordernone tbody').on('click', '.deleteBtn', function (e) {
+            e.preventDefault();
+            var candidateID = $(this).data('id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "dashboard")',
+                        type: 'POST',
+                        data: { id: candidateID },
+                        success: function (response) {
+                            Swal.fire(
+                                'Deleted!',
+                                'The candidate has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire(
+                                'Error!',
+                                'An error occurred while deleting the candidate.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>

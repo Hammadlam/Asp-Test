@@ -1,0 +1,233 @@
+﻿@model users 
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/Estore_layout.cshtml";
+}
+
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Login - OnlineAptitude</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Including GSAP library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <!-- Including SweetAlert2 library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 800px;
+            display: flex;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .login-box {
+            display: flex;
+            width: 100%;
+        }
+
+        .left, .right {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .left {
+            background: linear-gradient(to bottom, rgba(110, 123, 255, 0.70), rgba(0, 123, 255, 0.1));
+            width: 50%;
+            align-items: center;
+            color: #495057;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .left h2 {
+            margin-bottom: 30px;
+            color: navy;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+            .input-box input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ced4da;
+                border-radius: 5px;
+                outline: none;
+                font-size: 16px;
+                background-color: #fff;
+                color: #495057;
+            }
+
+            .input-box label {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                font-size: 16px;
+                color: #6c757d;
+                pointer-events: none;
+                transition: 0.5s;
+            }
+
+            .input-box input:focus ~ label,
+            .input-box input:not(:placeholder-shown) ~ label {
+                top: -15px;
+                left: 5px;
+                font-size: 12px;
+                color: navy;
+            }
+
+        .login-btn {
+            background: navy;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .login-btn:hover {
+                background: #0056b3;
+            }
+
+        .forgot-password {
+            display: block;
+            margin-top: 10px;
+            color: navy;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .forgot-password:hover {
+                color: #0056b3;
+            }
+
+        .signup-link {
+            margin-top: 20px;
+        }
+
+            .signup-link p {
+                color: #6c757d;
+            }
+
+            .signup-link a {
+                color: navy;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .signup-link a:hover {
+                    color: #0056b3;
+                }
+
+        .right {
+            background: #f8f9fa;
+            width: 50%;
+            align-items: center;
+            color: #495057;
+        }
+
+            .right h2 {
+                margin-bottom: 20px;
+            }
+
+            .right p {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="left">
+                <h1></h1>
+                <h2>Aptitude Test</h2>
+                <form asp-controller="dashboard" asp-action="Login" method="post" id="loginForm">
+                    <div class="input-box">
+                        <input type="email" asp-for="usr_email" id="email" placeholder=" " required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" asp-for="usr_password" id="password" placeholder=" " required>
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit" class="login-btn">Log In</button>
+                </form>
+
+            </div>
+            <div class="right">
+                <h2>We are more than just a company</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // GSAP animations
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.left', { duration: 1, x: -100, opacity: 0, ease: 'power2.out' });
+            gsap.from('.right', { duration: 1, x: 100, opacity: 0, ease: 'power2.out' });
+            gsap.from('.logo', { duration: 1, opacity: 0, delay: 1 });
+            gsap.from('h2', { duration: 1, opacity: 0, delay: 1.2 });
+            gsap.from('.input-box', { duration: 1, opacity: 0, y: 20, stagger: 0.2, delay: 1.4 });
+            gsap.from('.login-btn', { duration: 1, opacity: 0, y: 20, delay: 1.8 });
+            gsap.from('.forgot-password', { duration: 1, opacity: 0, delay: 2 });
+            gsap.from('.signup-link', { duration: 1, opacity: 0, delay: 2.2 });
+        });
+
+        // Form validation
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill in all fields.',
+                    position: 'top-end'
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

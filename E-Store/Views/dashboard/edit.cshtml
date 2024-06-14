@@ -1,0 +1,57 @@
+﻿@model products
+@{
+    ViewData["Title"] = "edit";
+    Layout = "~/Views/Shared/Estore_layout.cshtml";
+}
+<style>
+    .field-icon {
+        cursor: pointer;
+        font-size: 1em;
+        color: #aaa;
+    }
+</style>
+
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Edit Candidate Start -->
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <a href="index.html" class="">
+                            <h3 class="text-primary">OnlineAptitude</h3>
+                        </a>
+                    </div>
+                    <form id="editForm" asp-controller="dashboard" asp-action="Edit" method="post">
+                        <div class="form-floating mb-3">
+                              <label >Product Name</label>
+                            <input type="text" asp-for="product_name" class="form-control" id="firstname" placeholder="FirstName" required>
+                          
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label >Product Type</label>
+                            <input type="text" asp-for="prod_type" class="form-control" id="lastname" placeholder="Option1" required>
+                           
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label >Product Size</label>
+                            <input type="text" asp-for="prod_size" class="form-control" id="email" placeholder="Option2" required>
+                        
+                        </div>
+                        <div class="form-floating mb-3 position-relative">
+                            <label for="password">Product Color</label>
+                            <input type="text" asp-for="prod_color" class="form-control" id="password" placeholder="Option3" required>
+                           
+                        </div>
+                       
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4" id="editFormButton">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Candidate End -->
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
